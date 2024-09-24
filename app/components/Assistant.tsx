@@ -2,8 +2,8 @@
 
 import { assistantAtom, messagesAtom } from "@/atoms";
 import axios from "axios";
-import { useAtom } from "jotai";
-import { Assistant } from "openai/resources/beta/assistants/assistants.mjs";
+import { useAtom } from "jotai"; 
+import { Assistant } from "openai/resources/beta/assistants/assistants";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "./ui/button";

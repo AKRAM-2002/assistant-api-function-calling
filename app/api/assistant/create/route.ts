@@ -45,7 +45,7 @@ export async function GET() {
           },
         },
       ],
-      model: "gpt-4-1106-preview",
+      model: "gpt-3.5-turbo", 
     });
 
     console.log(assistant);

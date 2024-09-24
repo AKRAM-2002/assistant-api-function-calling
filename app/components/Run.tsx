@@ -28,7 +28,7 @@ function Run() {
   const [runState, setRunState] = useAtom(runStateAtom);
   const [, setStockPrices] = useAtom(stockPricesAtom);
 
-  console.log("run", run);
+  //console.log("run", run);
 
   // State
   const [creating, setCreating] = useState(false);
@@ -135,7 +135,7 @@ function Run() {
   };
 
   // Example tool calls: [TSLA, MSFT, AAPL]
-  // Goal: Fetch stock prices for each symbol
+  // Goal: Fetch stock prices for each symbol 
   //       Populate toolOutputs with all of the new stock prices [TSLA: 100, MSFT : 150, AAPL]
   //       Submit toolOutputs to the run in  a single request
   const handleSubmitAction = async () => {
@@ -144,7 +144,7 @@ function Run() {
 
     for (const toolCall of run?.required_action?.submit_tool_outputs
       .tool_calls ?? []) {
-      console.log(`toolCall`, toolCall);
+      //console.log(`toolCall`, toolCall);
       if (toolCall.function.name === "getStockInfo") {
         const { symbol, logoURL, success, errorMessage } = JSON.parse(
           toolCall.function.arguments
@@ -180,7 +180,7 @@ function Run() {
             price,
           };
 
-          console.log("new stock price", newStockPrice);
+         // console.log("new stock price", newStockPrice);
 
           toolOutputs.push({
             tool_call_id: toolCall.id,
@@ -189,7 +189,7 @@ function Run() {
 
           setStockPrices((prev) => [...prev, newStockPrice]);
         } catch (error) {
-          console.log("Error fetching stock", error);
+          //console.log("Error fetching stock", error);
           toast.error("Error fetching stock", { position: "bottom-center" });
         }
       } else {
@@ -199,7 +199,7 @@ function Run() {
       }
     }
 
-    console.log("toolOutputs", toolOutputs);
+    //console.log("toolOutputs", toolOutputs);
     if (toolOutputs.length > 0) {
       const response = await axios.post<{ run: Run; success: boolean }>(
         "/api/run/submit-tool-output",
@@ -210,7 +210,7 @@ function Run() {
         }
       );
 
-      console.log("Response data from submit tool output", response.data);
+      //console.log("Response data from submit tool output", response.data);
 
       if (response.data.success) {
         toast.success("Submitted action", { position: "bottom-center" });

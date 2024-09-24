@@ -28,22 +28,42 @@ export default function Home() {
     if (typeof window !== "undefined") {
       const localAssistant = localStorage.getItem("assistant");
       if (localAssistant) {
-        setAssistant(JSON.parse(localAssistant));
+        try {
+          setAssistant(JSON.parse(localAssistant));
+        } catch (error) {
+          console.error("Error parsing assistant data:", error);
+        }
       }
+  
       const localThread = localStorage.getItem("thread");
       if (localThread) {
-        setThread(JSON.parse(localThread));
+        try {
+          setThread(JSON.parse(localThread));
+        } catch (error) {
+          console.error("Error parsing thread data:", error);
+        }
       }
+  
       const localRun = localStorage.getItem("run");
       if (localRun) {
-        setRun(JSON.parse(localRun));
+        try {
+          setRun(JSON.parse(localRun));
+        } catch (error) {
+          console.error("Error parsing run data:", error);
+        }
       }
+  
       const localRunState = localStorage.getItem("runState");
       if (localRunState && isValidRunState(localRunState)) {
-        setRunState(localRunState);
+        try {
+          setRunState(localRunState);
+        } catch (error) {
+          console.error("Error parsing runState data:", error);
+        }
       }
     }
   }, []);
+  
 
   return (
     <main className="flex flex-col">
